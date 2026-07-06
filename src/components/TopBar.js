@@ -36,15 +36,22 @@ export default function TopBar({ onOpenManual }) {
             <span className="hidden sm:inline">Panduan</span>
           </button>
 
-          {/* Archive Toggle */}
-          <label className="flex items-center gap-1.5 cursor-pointer select-none text-xs sm:text-sm" title="Mode Arsip">
-            <span className="hidden sm:inline" style={{ color: 'var(--md-on-surface-variant)' }}>Arsip</span>
-            <div className={`relative w-10 h-5 rounded-full transition-colors duration-200`}
-              style={{ backgroundColor: archiveMode ? 'var(--md-primary)' : 'var(--md-outline-variant)' }}>
-              <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform duration-200 ${archiveMode ? 'translate-x-5' : ''}`} />
-            </div>
-            <input type="checkbox" checked={archiveMode} onChange={toggleArchive} className="sr-only" aria-label="Aktifkan mode arsip" />
-          </label>
+          {/* Archive Toggle — MD3 filter chip */}
+          <button
+            onClick={toggleArchive}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium transition-colors whitespace-nowrap border"
+            style={{
+              backgroundColor: archiveMode ? 'var(--md-secondary-container)' : 'transparent',
+              color: archiveMode ? 'var(--md-on-secondary-container)' : 'var(--md-on-surface-variant)',
+              borderColor: archiveMode ? 'var(--md-secondary-container)' : 'var(--md-outline-variant)',
+            }}
+            aria-label={archiveMode ? 'Nonaktifkan mode arsip' : 'Aktifkan mode arsip'}
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+            </svg>
+            <span>Arsip</span>
+          </button>
 
           {/* Theme Toggle */}
           <button
