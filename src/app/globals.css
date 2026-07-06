@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-surface: #F9FAFB;
+    --color-surface-card: #FFFFFF;
+    --color-text-primary: #111827;
+    --color-text-secondary: #6B7280;
+    --color-accent: #059669;
+    --color-danger: #DC2626;
+    --color-border: #E5E7EB;
+    --color-warning: #D97706;
+    --color-info: #0284C7;
+  }
+
+  [data-theme='dark'] {
+    --color-surface: #0F172A;
+    --color-surface-card: #1E293B;
+    --color-text-primary: #F1F5F9;
+    --color-text-secondary: #94A3B8;
+    --color-accent: #10B981;
+    --color-danger: #EF4444;
+    --color-border: #334155;
+    --color-warning: #F59E0B;
+    --color-info: #38BDF8;
+  }
+
+  * {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  body {
+    @apply bg-surface text-text-primary antialiased;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-surface-card rounded-xl border border-border p-4 sm:p-6 shadow-sm;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium
+           transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-white hover:brightness-110 focus:ring-accent;
+  }
+
+  .btn-secondary {
+    @apply btn bg-surface-card text-text-primary border border-border hover:bg-gray-50
+           dark:hover:bg-slate-700 focus:ring-accent;
+  }
+
+  .btn-danger {
+    @apply btn bg-danger text-white hover:brightness-110 focus:ring-danger;
+  }
+
+  .input-field {
+    @apply block w-full rounded-lg border border-border bg-surface-card px-3 py-2.5 text-sm
+           text-text-primary placeholder:text-text-secondary
+           focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent
+           disabled:opacity-50;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-text-secondary mb-1;
+  }
+
+  .toast {
+    @apply fixed bottom-4 right-4 z-50 rounded-lg px-4 py-3 text-sm text-white shadow-lg
+           animate-slide-up;
+  }
+
+  .toast-success { @apply toast bg-accent; }
+  .toast-error { @apply toast bg-danger; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(1rem); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
