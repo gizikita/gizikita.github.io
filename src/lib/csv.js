@@ -1,7 +1,7 @@
 // ponytail: papaparse for CSV — no manual string-building needed
 import Papa from 'papaparse';
 
-export function downloadCSV(records, filename = 'status-gizi-data.csv') {
+export function downloadCSV(records, filename = 'gizikita-data.csv') {
   const data = records.map(r => ({
     Nama: r.name || '',
     JK: r.gender === 'L' ? 'Laki-laki' : 'Perempuan',

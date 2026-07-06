@@ -5,19 +5,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // design.md light mode
         surface: 'var(--color-surface)',
         'surface-card': 'var(--color-surface-card)',
         'text-primary': 'var(--color-text-primary)',
         'text-secondary': 'var(--color-text-secondary)',
         accent: 'var(--color-accent)',
+        'on-accent': 'var(--color-on-accent)',
+        'accent-container': 'var(--color-accent-container)',
         danger: 'var(--color-danger)',
+        'on-danger': 'var(--color-on-danger)',
         warning: 'var(--color-warning)',
         info: 'var(--color-info)',
         border: 'var(--color-border)',
       },
       fontFamily: {
-        // ponytail: system-ui instead of self-hosting Inter — zero network cost, works offline by definition
         sans: ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
       },
       maxWidth: {

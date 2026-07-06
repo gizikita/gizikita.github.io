@@ -1,11 +1,11 @@
 {
-  "name": "StatusGiziKu",
-  "short_name": "SG",
+  "name": "GiziKita",
+  "short_name": "GK",
   "description": "Kalkulator status gizi balita 0–60 bulan",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F9FAFB",
-  "theme_color": "#059669",
+  "background_color": "#F5FBF7",
+  "theme_color": "#006B5C",
   "icons": [
     {
       "src": "/icon-192.png",

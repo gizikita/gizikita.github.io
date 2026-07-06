@@ -3,46 +3,23 @@
 import { useTheme } from '@/context/ThemeContext';
 import { useArchive } from '@/context/ArchiveContext';
 
-const INDEX_OPTIONS = [
-  { key: 'ringkasan', label: 'Ringkasan', short: 'All' },
-  { key: 'bbu', label: 'BB/U', short: 'BB/U' },
-  { key: 'tbu', label: 'TB/U', short: 'TB/U' },
-  { key: 'bbtb', label: 'BB/TB', short: 'BB/TB' },
-  { key: 'imtu', label: 'IMT/U', short: 'IMT/U' },
-];
-
-export default function TopBar({ onOpenManual, selectedIndex, onSelectIndex }) {
+export default function TopBar({ onOpenManual }) {
   const { theme, toggleTheme } = useTheme();
   const { archiveMode, toggleArchive } = useArchive();
 
   return (
-    <header className="sticky top-0 z-40 bg-surface-card/80 backdrop-blur-md border-b border-border">
+    <header className="sticky top-0 z-40 bg-surface-card border-b border-border">
       <div className="mx-auto max-w-content flex items-center justify-between h-14 px-4 gap-2">
         {/* Left: brand */}
         <div className="flex items-center gap-2 shrink-0">
-          <svg className="w-6 h-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+            style={{ color: 'var(--md-primary)' }}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
-          <span className="font-semibold text-base text-text-primary hidden sm:inline">StatusGiziKu</span>
-          <span className="font-semibold text-base text-text-primary sm:hidden">SG</span>
-        </div>
-
-        {/* Center: index mode pills */}
-        <div className="flex items-center gap-0.5 sm:gap-1 overflow-x-auto no-scrollbar">
-          {INDEX_OPTIONS.map(opt => (
-            <button
-              key={opt.key}
-              onClick={() => onSelectIndex(opt.key)}
-              className={`px-2 py-1 rounded-md text-xs font-medium transition-colors whitespace-nowrap
-                ${selectedIndex === opt.key
-                  ? 'bg-accent text-white'
-                  : 'text-text-secondary hover:bg-surface hover:text-text-primary'
-                }`}
-            >
-              <span className="sm:hidden">{opt.short}</span>
-              <span className="hidden sm:inline">{opt.label}</span>
-            </button>
-          ))}
+          <span className="font-semibold text-base hidden sm:inline"
+            style={{ color: 'var(--md-on-surface)' }}>GiziKita</span>
+          <span className="font-semibold text-base sm:hidden"
+            style={{ color: 'var(--md-on-surface)' }}>GK</span>
         </div>
 
         {/* Right: actions */}
@@ -61,8 +38,9 @@ export default function TopBar({ onOpenManual, selectedIndex, onSelectIndex }) {
 
           {/* Archive Toggle */}
           <label className="flex items-center gap-1.5 cursor-pointer select-none text-xs sm:text-sm" title="Mode Arsip">
-            <span className="text-text-secondary hidden sm:inline">Arsip</span>
-            <div className={`relative w-10 h-5 rounded-full transition-colors duration-200 ${archiveMode ? 'bg-accent' : 'bg-gray-300 dark:bg-slate-600'}`}>
+            <span className="hidden sm:inline" style={{ color: 'var(--md-on-surface-variant)' }}>Arsip</span>
+            <div className={`relative w-10 h-5 rounded-full transition-colors duration-200`}
+              style={{ backgroundColor: archiveMode ? 'var(--md-primary)' : 'var(--md-outline-variant)' }}>
               <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform duration-200 ${archiveMode ? 'translate-x-5' : ''}`} />
             </div>
             <input type="checkbox" checked={archiveMode} onChange={toggleArchive} className="sr-only" aria-label="Aktifkan mode arsip" />

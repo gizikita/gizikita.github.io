@@ -1,7 +1,7 @@
 // ponytail: minimal IndexedDB wrapper via idb — one store, no migrations needed for Phase 1
 import { openDB } from 'idb';
 
-const DB_NAME = 'statusgiziku';
+const DB_NAME = 'gizikita';
 const STORE_NAME = 'records';
 const DB_VERSION = 1;
 

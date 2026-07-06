@@ -1,6 +1,6 @@
 // ponytail: minimal cache-first service worker — one version, caches everything under /
 // Upgrade path: bump CACHE_VERSION to trigger reinstall + cleanup of old caches
-const CACHE_NAME = 'statusgiziku-v1';
+const CACHE_NAME = 'gizikita-v1';
 const PRECACHE_URLS = ['/', '/manifest.json'];
 
 self.addEventListener('install', event => {

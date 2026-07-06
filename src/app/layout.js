@@ -17,10 +17,10 @@ export default function RootLayout({ children }) {
     <html lang="id" data-theme="light" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#059669" />
+        <meta name="theme-color" content="#006B5C" />
         <meta name="description" content="Kalkulator status gizi balita dan anak 0–60 bulan berdasarkan standar Permenkes" />
         <link rel="manifest" href="/manifest.json" />
-        <title>StatusGiziKu</title>
+        <title>GiziKita</title>
       </head>
       <body className="min-h-screen flex flex-col">
         {children}

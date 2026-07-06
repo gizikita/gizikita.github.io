@@ -5,6 +5,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { ThemeProvider } from '@/context/ThemeContext';
 import { ArchiveProvider, useArchive } from '@/context/ArchiveContext';
 import TopBar from '@/components/TopBar';
+import IndexBar from '@/components/IndexBar';
 import MeasurementForm from '@/components/MeasurementForm';
 import ResultCard from '@/components/ResultCard';
 import ArchiveList from '@/components/ArchiveList';
@@ -89,11 +90,8 @@ function HomePage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <TopBar
-        onOpenManual={() => setManualOpen(true)}
-        selectedIndex={selectedIndex}
-        onSelectIndex={setSelectedIndex}
-      />
+      <TopBar onOpenManual={() => setManualOpen(true)} />
+      <IndexBar selectedIndex={selectedIndex} onSelectIndex={setSelectedIndex} />
 
       <main className="flex-1 mx-auto w-full max-w-content px-4 py-6">
         <MeasurementForm

@@ -4,27 +4,84 @@
 
 @layer base {
   :root {
-    --color-surface: #F9FAFB;
-    --color-surface-card: #FFFFFF;
-    --color-text-primary: #111827;
-    --color-text-secondary: #6B7280;
-    --color-accent: #059669;
-    --color-danger: #DC2626;
-    --color-border: #E5E7EB;
-    --color-warning: #D97706;
-    --color-info: #0284C7;
+    /* Material Design 3 — Light scheme */
+    --md-primary: #006B5C;
+    --md-on-primary: #FFFFFF;
+    --md-primary-container: #6EF7E0;
+    --md-on-primary-container: #00201B;
+    --md-secondary: #4A635D;
+    --md-on-secondary: #FFFFFF;
+    --md-secondary-container: #CDEBE1;
+    --md-on-secondary-container: #06201B;
+    --md-surface: #F5FBF7;
+    --md-on-surface: #171D1B;
+    --md-surface-variant: #DBE5DF;
+    --md-on-surface-variant: #3F4945;
+    --md-outline: #6F7975;
+    --md-outline-variant: #BBC5C0;
+    --md-error: #BA1A1A;
+    --md-on-error: #FFFFFF;
+    --md-error-container: #FFDAD6;
+    --md-on-error-container: #410002;
+    --md-surface-container: #EAF0EC;
+    --md-surface-container-high: #E4EAE7;
+    --md-surface-container-highest: #DEE5E1;
+
+    /* Aliases for components */
+    --color-surface: var(--md-surface);
+    --color-surface-card: var(--md-surface-container);
+    --color-surface-card-high: var(--md-surface-container-high);
+    --color-text-primary: var(--md-on-surface);
+    --color-text-secondary: var(--md-on-surface-variant);
+    --color-accent: var(--md-primary);
+    --color-on-accent: var(--md-on-primary);
+    --color-accent-container: var(--md-primary-container);
+    --color-on-accent-container: var(--md-on-primary-container);
+    --color-danger: var(--md-error);
+    --color-on-danger: var(--md-on-error);
+    --color-warning: #9C6D00;
+    --color-info: #00639B;
+    --color-border: var(--md-outline-variant);
   }
 
   [data-theme='dark'] {
-    --color-surface: #0F172A;
-    --color-surface-card: #1E293B;
-    --color-text-primary: #F1F5F9;
-    --color-text-secondary: #94A3B8;
-    --color-accent: #10B981;
-    --color-danger: #EF4444;
-    --color-border: #334155;
-    --color-warning: #F59E0B;
-    --color-info: #38BDF8;
+    /* Material Design 3 — Dark scheme */
+    --md-primary: #4ED9BE;
+    --md-on-primary: #00382F;
+    --md-primary-container: #005044;
+    --md-on-primary-container: #6EF7E0;
+    --md-secondary: #B1CFC4;
+    --md-on-secondary: #1D352E;
+    --md-secondary-container: #334C44;
+    --md-on-secondary-container: #CDEBE1;
+    --md-surface: #0E1512;
+    --md-on-surface: #DEE5E1;
+    --md-surface-variant: #3F4945;
+    --md-on-surface-variant: #BBC5C0;
+    --md-outline: #85938E;
+    --md-outline-variant: #3F4945;
+    --md-error: #FFB4AB;
+    --md-on-error: #690005;
+    --md-error-container: #93000A;
+    --md-on-error-container: #FFDAD6;
+    --md-surface-container: #1A211E;
+    --md-surface-container-high: #242B28;
+    --md-surface-container-highest: #2F3633;
+
+    --color-surface: var(--md-surface);
+    --color-surface-card: var(--md-surface-container);
+    --color-surface-card-high: var(--md-surface-container-high);
+    --color-text-primary: var(--md-on-surface);
+    --color-text-secondary: var(--md-on-surface-variant);
+    --color-accent: var(--md-primary);
+    --color-on-accent: var(--md-on-primary);
+    --color-accent-container: var(--md-primary-container);
+    --color-on-accent-container: var(--md-on-primary-container);
+    --color-danger: var(--md-error);
+    --color-on-danger: var(--md-on-error);
+    --color-warning: #F5C040;
+    --color-info: #7FCDFF;
+    --color-border: var(--md-outline-variant);
   }
 
   * {
@@ -34,11 +91,15 @@
   body {
     @apply bg-surface text-text-primary antialiased;
   }
+
+  :root {
+    --content-max-width: 960px;
+  }
 }
 
 @layer components {
   .card {
-    @apply bg-surface-card rounded-xl border border-border p-4 sm:p-6 shadow-sm;
+    @apply bg-surface-card rounded-xl border border-border p-4 sm:p-6;
   }
 
   .btn {
@@ -48,36 +109,63 @@
   }
 
   .btn-primary {
-    @apply btn bg-accent text-white hover:brightness-110 focus:ring-accent;
+    @apply btn text-white;
+    background-color: var(--md-primary);
+    color: var(--md-on-primary);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.1);
   }
 
   .btn-secondary {
-    @apply btn bg-surface-card text-text-primary border border-border hover:bg-gray-50
-           dark:hover:bg-slate-700 focus:ring-accent;
+    @apply btn border;
+    background-color: transparent;
+    color: var(--md-on-surface-variant);
+    border-color: var(--md-outline-variant);
+  }
+  .btn-secondary:hover {
+    background-color: var(--md-surface-container-high);
   }
 
   .btn-danger {
-    @apply btn bg-danger text-white hover:brightness-110 focus:ring-danger;
+    @apply btn;
+    background-color: var(--md-error);
+    color: var(--md-on-error);
+  }
+  .btn-danger:hover {
+    filter: brightness(1.1);
   }
 
   .input-field {
-    @apply block w-full rounded-lg border border-border bg-surface-card px-3 py-2.5 text-sm
-           text-text-primary placeholder:text-text-secondary
-           focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent
-           disabled:opacity-50;
+    @apply block w-full rounded-lg border px-3 py-2.5 text-sm placeholder:text-text-secondary
+           focus:outline-none focus:ring-2;
+    background-color: var(--md-surface-container);
+    color: var(--md-on-surface);
+    border-color: var(--md-outline-variant);
+  }
+  .input-field:focus {
+    border-color: var(--md-primary);
+    --tw-ring-color: var(--md-primary);
   }
 
   .label {
-    @apply block text-sm font-medium text-text-secondary mb-1;
+    @apply block text-sm font-medium mb-1;
+    color: var(--md-on-surface-variant);
   }
 
   .toast {
-    @apply fixed bottom-4 right-4 z-50 rounded-lg px-4 py-3 text-sm text-white shadow-lg
+    @apply fixed bottom-4 right-4 z-50 rounded-lg px-4 py-3 text-sm shadow-lg
            animate-slide-up;
   }
 
-  .toast-success { @apply toast bg-accent; }
-  .toast-error { @apply toast bg-danger; }
+  .toast-success {
+    background-color: var(--md-primary);
+    color: var(--md-on-primary);
+  }
+  .toast-error {
+    background-color: var(--md-error);
+    color: var(--md-on-error);
+  }
 }
 
 @keyframes slide-up {
