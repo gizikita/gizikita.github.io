@@ -8,33 +8,24 @@ const INDEX_OPTIONS = [
   { key: 'imtu', label: 'IMT/U' },
 ];
 
-// ponytail: Material Design 3 segmented button row
-// Wraps naturally on narrow screens so every label is always visible
 export default function IndexBar({ selectedIndex, onSelectIndex }) {
   return (
-    <div
-      className="flex flex-wrap gap-1 px-4 py-3 mx-auto w-full"
-      style={{ maxWidth: 'var(--content-max-width, 960px)' }}
-    >
-      <div
-        className="inline-flex flex-wrap rounded-xl border p-0.5"
+    <div className="flex flex-wrap gap-1 px-4 py-3 mx-auto w-full"
+      style={{ maxWidth: 'var(--content-max-width, 960px)' }}>
+      <div className="inline-flex flex-wrap rounded-xl border p-0.5"
         style={{
           borderColor: 'var(--md-outline-variant)',
           backgroundColor: 'var(--md-surface-container)',
-        }}
-      >
+        }}>
         {INDEX_OPTIONS.map(opt => {
           const active = selectedIndex === opt.key;
           return (
-            <button
-              key={opt.key}
-              onClick={() => onSelectIndex(opt.key)}
+            <button key={opt.key} onClick={() => onSelectIndex(opt.key)}
               className="px-3 py-1.5 text-xs sm:text-sm font-medium rounded-lg transition-colors whitespace-nowrap"
               style={{
                 backgroundColor: active ? 'var(--md-primary)' : 'transparent',
                 color: active ? 'var(--md-on-primary)' : 'var(--md-on-surface-variant)',
-              }}
-            >
+              }}>
               {opt.label}
             </button>
           );

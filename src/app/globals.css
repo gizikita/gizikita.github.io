@@ -98,44 +98,6 @@
 }
 
 @layer components {
-  .card {
-    @apply bg-surface-card rounded-xl border border-border p-4 sm:p-6;
-  }
-
-  .btn {
-    @apply inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-medium
-           transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2
-           disabled:opacity-50 disabled:pointer-events-none;
-  }
-
-  .btn-primary {
-    @apply btn text-white;
-    background-color: var(--md-primary);
-    color: var(--md-on-primary);
-  }
-  .btn-primary:hover {
-    filter: brightness(1.1);
-  }
-
-  .btn-secondary {
-    @apply btn border;
-    background-color: transparent;
-    color: var(--md-on-surface-variant);
-    border-color: var(--md-outline-variant);
-  }
-  .btn-secondary:hover {
-    background-color: var(--md-surface-container-high);
-  }
-
-  .btn-danger {
-    @apply btn;
-    background-color: var(--md-error);
-    color: var(--md-on-error);
-  }
-  .btn-danger:hover {
-    filter: brightness(1.1);
-  }
-
   .input-field {
     @apply block w-full rounded-lg border px-3 py-2.5 text-sm placeholder:text-text-secondary
            focus:outline-none focus:ring-2;
@@ -146,25 +108,6 @@
   .input-field:focus {
     border-color: var(--md-primary);
     --tw-ring-color: var(--md-primary);
-  }
-
-  .label {
-    @apply block text-sm font-medium mb-1;
-    color: var(--md-on-surface-variant);
-  }
-
-  .toast {
-    @apply fixed bottom-4 right-4 z-50 rounded-lg px-4 py-3 text-sm shadow-lg
-           animate-slide-up;
-  }
-
-  .toast-success {
-    background-color: var(--md-primary);
-    color: var(--md-on-primary);
-  }
-  .toast-error {
-    background-color: var(--md-error);
-    color: var(--md-on-error);
   }
 }
 

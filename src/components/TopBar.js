@@ -25,12 +25,15 @@ export default function TopBar({ onOpenManual }) {
         {/* Right: actions */}
         <div className="flex items-center gap-1 sm:gap-2">
           {/* Panduan Data */}
-          <button
-            onClick={onOpenManual}
-            className="btn-secondary !px-2 !py-1.5 text-xs sm:text-sm sm:!px-3"
-            title="Panduan Data"
-          >
-            <svg className="w-4 h-4 sm:mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <button onClick={onOpenManual}
+            className="flex items-center gap-1 px-2 py-1.5 rounded-full text-xs font-medium border transition-colors whitespace-nowrap"
+            style={{
+              backgroundColor: 'transparent',
+              color: 'var(--md-on-surface-variant)',
+              borderColor: 'var(--md-outline-variant)',
+            }}
+            title="Panduan Data">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
             </svg>
             <span className="hidden sm:inline">Panduan</span>
@@ -54,9 +57,13 @@ export default function TopBar({ onOpenManual }) {
           </button>
 
           {/* Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="btn-secondary !px-2 !py-1.5 text-sm"
+          <button onClick={toggleTheme}
+            className="flex items-center justify-center w-8 h-8 rounded-full border transition-colors"
+            style={{
+              backgroundColor: 'transparent',
+              color: 'var(--md-on-surface-variant)',
+              borderColor: 'var(--md-outline-variant)',
+            }}
             title={theme === 'light' ? 'Mode Gelap' : 'Mode Terang'}
           >
             {theme === 'light' ? (
