@@ -146,6 +146,7 @@ export function getStatusColorClass(key) {
     risikoLebih: 'text-warning', sangatPendek: 'text-danger', pendek: 'text-warning',
     tinggi: 'text-info', buruk: 'text-danger', baik: 'text-accent',
     risiko: 'text-warning', lebih: 'text-warning', obesitas: 'text-danger',
+    tidakAdaData: 'text-text-secondary',
   };
   return map[key] || 'text-text-primary';
 }

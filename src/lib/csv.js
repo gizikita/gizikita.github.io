@@ -3,8 +3,8 @@ import Papa from 'papaparse';
 
 export function downloadCSV(records, filename = 'gizikita-data.csv') {
   const data = records.map(r => ({
-    Nama: r.name || '',
-    JK: r.gender === 'L' ? 'Laki-laki' : 'Perempuan',
+    Nama: r.name ? r.name.toUpperCase() : '',
+    JK: r.gender === 'L' ? 'L' : 'P',
     'Tgl Lahir': r.birthDate || '',
     'Tgl Ukur': r.measurementDate || '',
     'BB (kg)': r.weight != null ? String(r.weight) : '',

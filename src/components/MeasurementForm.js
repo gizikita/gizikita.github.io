@@ -17,9 +17,10 @@ const INDEX_INFO = {
 };
 
 function formatDate(isoDate) {
-  if (!isoDate) return '';
-  const [y, m, d] = isoDate.split('-');
-  return `${d}-${m}-${y}`;
+  if (!isoDate || typeof isoDate !== 'string') return '';
+  const parts = isoDate.split('-');
+  if (parts.length !== 3 || parts[0].length !== 4) return isoDate; // not ISO, show raw
+  return `${parts[2]}-${parts[1]}-${parts[0]}`;
 }
 
 function SegmentedToggle({ options, value, onChange }) {

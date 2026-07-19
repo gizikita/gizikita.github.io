@@ -11,7 +11,9 @@ import ResultCard from '@/components/ResultCard';
 import ArchiveList from '@/components/ArchiveList';
 import ManualModal from '@/components/ManualModal';
 import { hitungStatusGizi } from '@/lib/calc';
-import { getAllRecords, addRecord, updateRecord } from '@/lib/db';
+import { getAllRecords, addRecord, updateRecord, importRecords } from '@/lib/db';
+import { parseXLSX, normalizeRow } from '@/lib/xlsx';
+import Papa from 'papaparse';
 
 function HomePage() {
   const [manualOpen, setManualOpen] = useState(false);
@@ -88,6 +90,83 @@ function HomePage() {
     setEditingRecord(null);
   }
 
+  async function handleImport(file) {
+    try {
+      showToast('Membaca file...', 'info');
+      const isCSV = file.name.endsWith('.csv');
+      let rows;
+
+      if (isCSV) {
+        const text = await file.text();
+        const parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
+        rows = parsed.data;
+      } else {
+        const buffer = await file.arrayBuffer();
+        rows = await parseXLSX(buffer);
+      }
+
+      if (!rows || rows.length === 0) {
+        showToast('Tidak ada data yang ditemukan dalam file', 'error');
+        return;
+      }
+
+      const normalized = rows.map(normalizeRow).filter(r => r.name && r.name.trim());
+
+      if (normalized.length === 0) {
+        showToast('Tidak ada data valid (nama tidak ditemukan)', 'error');
+        return;
+      }
+
+      // Auto-detect gender from first row with data if most rows have it
+      // Also try to derive measurementDate from filename or use today
+      const today = new Date().toISOString().split('T')[0];
+      const recordsToImport = normalized.map(r => {
+        const umurBulan = r.birthDate
+          ? Math.round((new Date() - new Date(r.birthDate)) / (1000 * 60 * 60 * 24 * 30.44))
+          : null;
+        return {
+          name: r.name,
+          birthDate: r.birthDate || '',
+          gender: r.gender || '',
+          parentName: r.parentName || '',
+          address: r.address || '',
+          measurementDate: r.measurementDate || today,
+          weight: r.weight,
+          height: r.height,
+          umurBulan,
+          status: '',
+          statusKey: '',
+        };
+      });
+
+      const { added, skipped, records: savedRecs } = await importRecords(recordsToImport);
+
+      // Set status: "Tidak Ada Data" for null measurements, else calculate
+      for (const rec of savedRecs) {
+        if (!rec.weight || !rec.height || rec.umurBulan == null) {
+          rec.status = 'Tidak Ada Data';
+          rec.statusKey = 'tidakAdaData';
+          await updateRecord(rec);
+          continue;
+        }
+        try {
+          const result = hitungStatusGizi(rec.umurBulan, rec.gender || 'L', rec.weight, rec.height);
+          rec.status = result.status.label;
+          rec.statusKey = result.status.key;
+          await updateRecord(rec);
+        } catch (e) {
+          console.warn('Gagal kalkulasi untuk', rec.name, e);
+        }
+      }
+
+      await loadRecords();
+      showToast(`${added} data berhasil diimpor${skipped > 0 ? `, ${skipped} dilewati (duplikat)` : ''}`, 'success');
+    } catch (e) {
+      console.error('Import gagal:', e);
+      showToast('Gagal mengimpor file: ' + e.message, 'error');
+    }
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <TopBar onOpenManual={() => setManualOpen(true)} />
@@ -110,6 +189,7 @@ function HomePage() {
             onEdit={handleEdit}
             refreshKey={refreshKey}
             onRefresh={loadRecords}
+            onImport={handleImport}
           />
         )}
       </main>
@@ -117,7 +197,11 @@ function HomePage() {
       <ManualModal open={manualOpen} onClose={() => setManualOpen(false)} />
 
       {toast && (
-        <div className={`fixed bottom-4 right-4 z-50 rounded-lg px-4 py-3 text-sm text-white shadow-lg animate-slide-up ${toast.type === 'error' ? 'bg-danger' : 'bg-accent'}`}>
+        <div className="fixed bottom-4 right-4 z-50 rounded-lg px-4 py-3 text-sm shadow-lg animate-slide-up"
+          style={{
+            backgroundColor: toast.type === 'error' ? 'var(--md-error)' : toast.type === 'info' ? 'var(--md-primary)' : 'var(--md-primary)',
+            color: toast.type === 'error' ? 'var(--md-on-error)' : 'var(--md-on-primary)',
+          }}>
           {toast.message}
         </div>
       )}

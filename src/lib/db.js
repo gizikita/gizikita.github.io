@@ -47,7 +47,44 @@ export async function deleteRecord(id) {
   await db.delete(STORE_NAME, id);
 }
 
+// Hapus semua records
+export async function deleteAllRecords() {
+  const db = await getDb();
+  const all = await db.getAll(STORE_NAME);
+  const tx = db.transaction(STORE_NAME, 'readwrite');
+  await Promise.all(all.map(r => tx.store.delete(r.id)));
+  await tx.done;
+}
+
 export async function getRecord(id) {
   const db = await getDb();
   return db.get(STORE_NAME, id);
+}
+
+// Bulk import with duplicate name+birthDate detection
+// Returns { added, skipped, records: addedRecord[] }
+export async function importRecords(records) {
+  const db = await getDb();
+  const existing = await db.getAll(STORE_NAME);
+  let added = 0, skipped = 0;
+  const addedRecords = [];
+
+  for (const rec of records) {
+    const dup = existing.find(e =>
+      e.name?.toLowerCase().trim() === rec.name?.toLowerCase().trim() &&
+      (rec.birthDate ? e.birthDate === rec.birthDate : e.umurBulan === rec.umurBulan)
+    );
+    if (dup) { skipped++; continue; }
+
+    const data = {
+      ...rec,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    const id = await db.add(STORE_NAME, data);
+    addedRecords.push({ ...data, id });
+    added++;
+  }
+
+  return { added, skipped, records: addedRecords };
 }
