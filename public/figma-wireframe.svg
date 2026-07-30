@@ -1,0 +1,441 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 2000" font-family="system-ui, -apple-system, sans-serif">
+
+  <defs>
+    <marker id="conn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#999"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="2000" fill="#F5F5F5"/>
+
+  <!-- Title -->
+  <text x="600" y="35" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Wireframe Frontend GiziKita</text>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 1: Homepage Ringkasan -->
+  <!-- ============================================================ -->
+  <g transform="translate(30, 55)">
+    <rect width="340" height="580" rx="8" fill="#fff" stroke="#CCC" stroke-width="1"/>
+    <text x="170" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Halaman Utama — Ringkasan</text>
+
+    <!-- TopBar -->
+    <rect x="10" y="30" width="320" height="36" rx="4" fill="#E0E0E0"/>
+    <rect x="18" y="38" width="12" height="12" rx="2" fill="#999"/>
+    <text x="36" y="47" font-size="8" fill="#555">GiziKita</text>
+    <rect x="282" y="38" width="12" height="12" rx="2" fill="#999"/>
+    <rect x="300" y="38" width="12" height="12" rx="2" fill="#999"/>
+
+    <!-- IndexBar -->
+    <rect x="10" y="72" width="320" height="30" rx="4" fill="#F0F0F0"/>
+    <rect x="14" y="76" width="58" height="22" rx="4" fill="#333"/>
+    <text x="43" y="90" text-anchor="middle" font-size="7" fill="#fff">Ringkasan</text>
+    <rect x="76" y="76" width="40" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="96" y="90" text-anchor="middle" font-size="7" fill="#888">BB/U</text>
+    <rect x="120" y="76" width="40" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="140" y="90" text-anchor="middle" font-size="7" fill="#888">TB/U</text>
+    <rect x="164" y="76" width="46" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="187" y="90" text-anchor="middle" font-size="7" fill="#888">BB/TB</text>
+    <rect x="214" y="76" width="42" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="235" y="90" text-anchor="middle" font-size="7" fill="#888">IMT/U</text>
+
+    <!-- Form section -->
+    <text x="20" y="125" font-size="9" font-weight="bold" fill="#333">Input Pengukuran</text>
+
+    <!-- Usia toggle -->
+    <rect x="20" y="135" width="300" height="24" rx="4" fill="#F0F0F0" stroke="#DDD" stroke-width="1"/>
+    <rect x="22" y="137" width="148" height="20" rx="3" fill="#333"/>
+    <text x="96" y="151" text-anchor="middle" font-size="7" fill="#fff">Tanggal Lahir</text>
+    <text x="200" y="151" text-anchor="middle" font-size="7" fill="#888">Usia (bulan)</text>
+
+    <!-- Gender -->
+    <text x="20" y="175" font-size="7" fill="#888">Jenis Kelamin</text>
+    <rect x="20" y="180" width="142" height="28" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="91" y="198" text-anchor="middle" font-size="8" fill="#555">Laki-laki</text>
+    <rect x="168" y="180" width="142" height="28" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="239" y="198" text-anchor="middle" font-size="8" fill="#555">Perempuan</text>
+
+    <!-- BB + TB fields -->
+    <text x="20" y="225" font-size="7" fill="#888">Berat Badan (kg)</text>
+    <rect x="20" y="230" width="140" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="249" font-size="7" fill="#AAA">Contoh: 8.5</text>
+
+    <text x="180" y="225" font-size="7" fill="#888">Tinggi Badan (cm)</text>
+    <rect x="180" y="230" width="140" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="188" y="249" font-size="7" fill="#AAA">Contoh: 65.5</text>
+
+    <!-- Hitung button -->
+    <rect x="20" y="275" width="300" height="36" rx="4" fill="#333"/>
+    <text x="170" y="298" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">Hitung</text>
+
+    <!-- Result section (hidden initially, shown after click) -->
+    <text x="20" y="335" font-size="8" fill="#999">━━ Hasil akan muncul di sini ━━</text>
+    <text x="170" y="350" text-anchor="middle" font-size="7" fill="#CCC">[setelah klik Hitung]</text>
+  </g>
+
+  <!-- Screen 2: Hasil -->
+  <g transform="translate(400, 55)">
+    <rect width="340" height="580" rx="8" fill="#fff" stroke="#CCC" stroke-width="1"/>
+    <text x="170" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Hasil Kalkulasi</text>
+
+    <!-- TopBar -->
+    <rect x="10" y="30" width="320" height="36" rx="4" fill="#E0E0E0"/>
+    <rect x="18" y="38" width="12" height="12" rx="2" fill="#999"/>
+    <text x="36" y="47" font-size="8" fill="#555">GiziKita</text>
+
+    <!-- IndexBar -->
+    <rect x="10" y="72" width="320" height="30" rx="4" fill="#F0F0F0"/>
+    <rect x="14" y="76" width="58" height="22" rx="4" fill="#333"/>
+    <text x="43" y="90" text-anchor="middle" font-size="7" fill="#fff">Ringkasan</text>
+    <rect x="76" y="76" width="40" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="120" y="76" width="40" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="164" y="76" width="46" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="214" y="76" width="42" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+
+    <!-- Form filled -->
+    <text x="20" y="120" font-size="7" fill="#888">Usia: 24 bln · Laki-laki · BB: 12.5 kg · TB: 85 cm</text>
+
+    <!-- Result Card -->
+    <rect x="15" y="135" width="310" height="200" rx="6" fill="#FAFAFA" stroke="#DDD" stroke-width="1"/>
+    <text x="170" y="158" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Status Gizi</text>
+    <text x="170" y="185" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">Gizi Baik</text>
+    <line x1="20" y1="200" x2="320" y2="200" stroke="#EEE" stroke-width="1"/>
+
+    <!-- Z-score grid -->
+    <text x="25" y="218" font-size="7" fill="#888">Detail Z-Score</text>
+    <rect x="20" y="225" width="92" height="40" rx="4" fill="#F5F5F5"/>
+    <text x="66" y="240" text-anchor="middle" font-size="7" fill="#888">BB/U</text>
+    <text x="66" y="256" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">-1.23</text>
+
+    <rect x="120" y="225" width="92" height="40" rx="4" fill="#F5F5F5"/>
+    <text x="166" y="240" text-anchor="middle" font-size="7" fill="#888">TB/U</text>
+    <text x="166" y="256" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">-0.45</text>
+
+    <rect x="220" y="225" width="92" height="40" rx="4" fill="#F5F5F5"/>
+    <text x="266" y="240" text-anchor="middle" font-size="7" fill="#888">BB/TB</text>
+    <text x="266" y="256" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">-0.89</text>
+
+    <rect x="20" y="275" width="92" height="40" rx="4" fill="#F5F5F5"/>
+    <text x="66" y="290" text-anchor="middle" font-size="7" fill="#888">IMT/U</text>
+    <text x="66" y="306" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">-0.50</text>
+
+    <!-- Edit hint -->
+    <text x="170" y="355" text-anchor="middle" font-size="7" fill="#CCC">Ganti indeks untuk lihat detail per indeks</text>
+  </g>
+
+  <!-- Screen 3: BB/U mode -->
+  <g transform="translate(770, 55)">
+    <rect width="340" height="580" rx="8" fill="#fff" stroke="#CCC" stroke-width="1"/>
+    <text x="170" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Mode BB/U</text>
+
+    <rect x="10" y="30" width="320" height="36" rx="4" fill="#E0E0E0"/>
+    <rect x="10" y="72" width="320" height="30" rx="4" fill="#F0F0F0"/>
+    <rect x="14" y="76" width="58" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="76" y="76" width="40" height="22" rx="4" fill="#333"/>
+    <text x="96" y="90" text-anchor="middle" font-size="7" fill="#fff">BB/U</text>
+    <rect x="120" y="76" width="40" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="164" y="76" width="46" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="214" y="76" width="42" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+
+    <text x="20" y="118" font-size="9" font-weight="bold" fill="#333">BB/U — Berat Badan menurut Umur</text>
+
+    <!-- Usia -->
+    <text x="20" y="142" font-size="7" fill="#888">Usia (bulan)</text>
+    <rect x="20" y="147" width="300" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="166" font-size="7" fill="#AAA">18</text>
+
+    <!-- Gender -->
+    <text x="20" y="192" font-size="7" fill="#888">Jenis Kelamin</text>
+    <rect x="20" y="197" width="142" height="28" rx="4" fill="#333"/>
+    <text x="91" y="215" text-anchor="middle" font-size="8" fill="#fff">Laki-laki</text>
+    <rect x="168" y="197" width="142" height="28" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="239" y="215" text-anchor="middle" font-size="8" fill="#555">Perempuan</text>
+
+    <!-- BB ONLY — TB field not shown -->
+    <text x="20" y="245" font-size="7" fill="#888">Berat Badan (kg)</text>
+    <rect x="20" y="250" width="300" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="269" font-size="7" fill="#AAA">8.2</text>
+
+    <rect x="20" y="295" width="300" height="36" rx="4" fill="#333"/>
+    <text x="170" y="318" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">Hitung</text>
+
+    <!-- Result hint -->
+    <rect x="20" y="345" width="300" height="100" rx="6" fill="#FAFAFA" stroke="#DDD" stroke-width="1"/>
+    <text x="170" y="370" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Status: Berat Badan Normal</text>
+    <text x="170" y="388" text-anchor="middle" font-size="7" fill="#888">Z-Score: -0.87 SD</text>
+    <rect x="110" y="400" width="120" height="28" rx="4" fill="#F5F5F5"/>
+    <text x="170" y="418" text-anchor="middle" font-size="7" fill="#888">BB/U Z: -0.87</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 4: Arsip Form -->
+  <!-- ============================================================ -->
+  <g transform="translate(30, 660)">
+    <rect width="520" height="580" rx="8" fill="#fff" stroke="#CCC" stroke-width="1"/>
+    <text x="260" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Mode Arsip — Form Data Anak</text>
+
+    <rect x="10" y="30" width="500" height="36" rx="4" fill="#E0E0E0"/>
+    <rect x="18" y="38" width="12" height="12" rx="2" fill="#999"/>
+    <text x="36" y="47" font-size="8" fill="#555">GiziKita</text>
+    <!-- Arsip chip active -->
+    <rect x="270" y="36" width="50" height="18" rx="9" fill="#333"/>
+    <text x="295" y="48" text-anchor="middle" font-size="6" fill="#fff">Arsip</text>
+
+    <rect x="10" y="72" width="500" height="30" rx="4" fill="#F0F0F0"/>
+
+    <text x="20" y="120" font-size="9" font-weight="bold" fill="#333">Data Anak &amp; Pengukuran</text>
+
+    <!-- Nama -->
+    <text x="20" y="143" font-size="7" fill="#888">Nama Anak</text>
+    <rect x="20" y="148" width="480" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="167" font-size="7" fill="#AAA">BUDI SANTOSO</text>
+
+    <!-- Usia toggle -->
+    <rect x="20" y="190" width="480" height="24" rx="4" fill="#F0F0F0" stroke="#DDD" stroke-width="1"/>
+    <rect x="22" y="192" width="238" height="20" rx="3" fill="#333"/>
+    <text x="141" y="206" text-anchor="middle" font-size="7" fill="#fff">Tanggal Lahir</text>
+    <text x="310" y="206" text-anchor="middle" font-size="7" fill="#888">Usia (bulan)</text>
+
+    <!-- Tgl Lahir -->
+    <text x="20" y="230" font-size="7" fill="#888">Tanggal Lahir</text>
+    <rect x="20" y="235" width="480" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="254" font-size="7" fill="#AAA">2023-01-15</text>
+    <text x="330" y="254" font-size="6" fill="#999">15-01-2023</text>
+
+    <!-- Ortu -->
+    <text x="20" y="282" font-size="7" fill="#888">Nama Orang Tua</text>
+    <rect x="20" y="287" width="480" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="306" font-size="7" fill="#AAA">SARI WIDODO</text>
+
+    <!-- Alamat -->
+    <text x="20" y="334" font-size="7" fill="#888">Alamat</text>
+    <rect x="20" y="339" width="480" height="40" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="358" font-size="7" fill="#AAA">JL. MERPATI NO. 10, KEC. BANJARSARI</text>
+
+    <!-- Gender -->
+    <text x="20" y="398" font-size="7" fill="#888">Jenis Kelamin</text>
+    <rect x="20" y="403" width="148" height="28" rx="4" fill="#333"/>
+    <text x="94" y="421" text-anchor="middle" font-size="8" fill="#fff">Laki-laki</text>
+    <rect x="175" y="403" width="148" height="28" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="249" y="421" text-anchor="middle" font-size="8" fill="#555">Perempuan</text>
+
+    <!-- Tgl Ukur + BB -->
+    <text x="20" y="450" font-size="7" fill="#888">Tanggal Ukur</text>
+    <rect x="20" y="455" width="148" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="474" font-size="7" fill="#AAA">25-07-2026</text>
+
+    <text x="190" y="450" font-size="7" fill="#888">BB (kg)</text>
+    <rect x="190" y="455" width="148" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="198" y="474" font-size="7" fill="#AAA">12.5</text>
+
+    <!-- TB -->
+    <text x="360" y="450" font-size="7" fill="#888">TB (cm)</text>
+    <rect x="360" y="455" width="140" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="368" y="474" font-size="7" fill="#AAA">85</text>
+
+    <!-- Simpan -->
+    <rect x="20" y="500" width="480" height="36" rx="4" fill="#333"/>
+    <text x="260" y="523" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">Simpan &amp; Hitung</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- SCREEN 5: Archive Records -->
+  <!-- ============================================================ -->
+  <g transform="translate(580, 660)">
+    <rect width="540" height="580" rx="8" fill="#fff" stroke="#CCC" stroke-width="1"/>
+    <text x="270" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Mode Arsip — Daftar Catatan</text>
+
+    <rect x="10" y="30" width="520" height="36" rx="4" fill="#E0E0E0"/>
+    <rect x="10" y="72" width="520" height="30" rx="4" fill="#F0F0F0"/>
+
+    <!-- Header with actions -->
+    <text x="20" y="120" font-size="9" font-weight="bold" fill="#333">Catatan Tersimpan (2)</text>
+    <rect x="140" y="108" width="55" height="22" rx="11" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="167" y="122" text-anchor="middle" font-size="7" fill="#555">Import</text>
+    <rect x="200" y="108" width="60" height="22" rx="11" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="230" y="122" text-anchor="middle" font-size="7" fill="#555">Template</text>
+    <rect x="420" y="108" width="65" height="22" rx="11" fill="none" stroke="#999" stroke-width="1"/>
+    <text x="452" y="122" text-anchor="middle" font-size="7" fill="#777">Hapus Semua</text>
+
+    <!-- Table header -->
+    <rect x="15" y="140" width="510" height="24" rx="4" fill="#F0F0F0"/>
+    <text x="25" y="155" font-size="7" fill="#666">Nama</text>
+    <text x="120" y="155" font-size="7" fill="#666">JK</text>
+    <text x="160" y="155" font-size="7" fill="#666">Umur</text>
+    <text x="220" y="155" font-size="7" fill="#666">BB</text>
+    <text x="270" y="155" font-size="7" fill="#666">TB</text>
+    <text x="320" y="155" font-size="7" fill="#666">Status</text>
+    <text x="420" y="155" font-size="7" fill="#666">Aksi</text>
+
+    <!-- Row 1 -->
+    <rect x="15" y="167" width="510" height="28" rx="2" fill="#fff"/>
+    <text x="25" y="185" font-size="8" fill="#333">BUDI SANTOSO</text>
+    <text x="120" y="185" font-size="8" fill="#666">L</text>
+    <text x="160" y="185" font-size="8" fill="#666">18 bln</text>
+    <text x="220" y="185" font-size="8" fill="#333">12.5</text>
+    <text x="270" y="185" font-size="8" fill="#333">85</text>
+    <rect x="315" y="175" width="55" height="14" rx="3" fill="#E8F5E9"/>
+    <text x="342" y="185" text-anchor="middle" font-size="6" fill="#2E7D32">Gizi Baik</text>
+    <text x="415" y="185" font-size="8" fill="#333">Edit</text>
+    <text x="455" y="185" font-size="8" fill="#C62828">Hapus</text>
+
+    <line x1="15" y1="197" x2="525" y2="197" stroke="#F0F0F0" stroke-width="1"/>
+
+    <!-- Row 2 -->
+    <rect x="15" y="199" width="510" height="28" rx="2" fill="#fff"/>
+    <text x="25" y="217" font-size="8" fill="#333">SITI AISYAH</text>
+    <text x="120" y="217" font-size="8" fill="#666">P</text>
+    <text x="160" y="217" font-size="8" fill="#666">24 bln</text>
+    <text x="220" y="217" font-size="8" fill="#333">10.2</text>
+    <text x="270" y="217" font-size="8" fill="#333">78</text>
+    <rect x="315" y="209" width="55" height="14" rx="3" fill="#FFF9C4"/>
+    <text x="342" y="219" text-anchor="middle" font-size="6" fill="#F57F17">Gizi Kurang</text>
+    <text x="415" y="217" font-size="8" fill="#333">Edit</text>
+    <text x="455" y="217" font-size="8" fill="#C62828">Hapus</text>
+
+    <line x1="15" y1="229" x2="525" y2="229" stroke="#F0F0F0" stroke-width="1"/>
+
+    <!-- Row 3 — Tidak ada data -->
+    <rect x="15" y="231" width="510" height="28" rx="2" fill="#fff"/>
+    <text x="25" y="249" font-size="8" fill="#333">ADI PRASETYO</text>
+    <text x="120" y="249" font-size="8" fill="#666">L</text>
+    <text x="160" y="249" font-size="8" fill="#666">6 bln</text>
+    <text x="220" y="249" font-size="8" fill="#999">-</text>
+    <text x="270" y="249" font-size="8" fill="#999">-</text>
+    <rect x="315" y="241" width="70" height="14" rx="3" fill="#F0F0F0"/>
+    <text x="350" y="251" text-anchor="middle" font-size="6" fill="#888">Tidak Ada Data</text>
+    <text x="415" y="249" font-size="8" fill="#333">Edit</text>
+    <text x="455" y="249" font-size="8" fill="#C62828">Hapus</text>
+
+    <!-- XLSX button -->
+    <rect x="15" y="275" width="65" height="28" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="47" y="293" text-anchor="middle" font-size="8" fill="#555">XLSX</text>
+  </g>
+
+  <!-- ============================================================ -->
+  <!-- Screen 6: TB/U Mode -->
+  <!-- ============================================================ -->
+  <g transform="translate(30, 1270)">
+    <rect width="340" height="440" rx="8" fill="#fff" stroke="#CCC" stroke-width="1"/>
+    <text x="170" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Mode TB/U</text>
+
+    <rect x="10" y="30" width="320" height="36" rx="4" fill="#E0E0E0"/>
+    <rect x="10" y="72" width="320" height="30" rx="4" fill="#F0F0F0"/>
+    <rect x="14" y="76" width="58" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="76" y="76" width="40" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="120" y="76" width="40" height="22" rx="4" fill="#333"/>
+    <text x="140" y="90" text-anchor="middle" font-size="7" fill="#fff">TB/U</text>
+    <rect x="164" y="76" width="46" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="214" y="76" width="42" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+
+    <text x="20" y="118" font-size="9" font-weight="bold" fill="#333">TB/U — Tinggi Badan menurut Umur</text>
+
+    <text x="20" y="142" font-size="7" fill="#888">Usia (bulan)</text>
+    <rect x="20" y="147" width="300" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="166" font-size="7" fill="#AAA">36</text>
+
+    <text x="20" y="192" font-size="7" fill="#888">Jenis Kelamin</text>
+    <rect x="20" y="197" width="142" height="28" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <text x="91" y="215" text-anchor="middle" font-size="8" fill="#555">Laki-laki</text>
+    <rect x="168" y="197" width="142" height="28" rx="4" fill="#333"/>
+    <text x="239" y="215" text-anchor="middle" font-size="8" fill="#fff">Perempuan</text>
+
+    <!-- TB ONLY -->
+    <text x="20" y="245" font-size="7" fill="#888">Tinggi Badan (cm)</text>
+    <rect x="20" y="250" width="300" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="269" font-size="7" fill="#AAA">92</text>
+
+    <rect x="20" y="295" width="300" height="36" rx="4" fill="#333"/>
+    <text x="170" y="318" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">Hitung</text>
+
+    <rect x="20" y="345" width="300" height="75" rx="6" fill="#FAFAFA" stroke="#DDD" stroke-width="1"/>
+    <text x="170" y="365" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Status: Normal</text>
+    <text x="170" y="385" text-anchor="middle" font-size="7" fill="#888">Z-Score: +0.32 SD</text>
+  </g>
+
+  <!-- Screen 7: IMT/U Mode -->
+  <g transform="translate(400, 1270)">
+    <rect width="340" height="440" rx="8" fill="#fff" stroke="#CCC" stroke-width="1"/>
+    <text x="170" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Mode IMT/U</text>
+    <rect x="10" y="30" width="320" height="36" rx="4" fill="#E0E0E0"/>
+    <rect x="10" y="72" width="320" height="30" rx="4" fill="#F0F0F0"/>
+    <rect x="14" y="76" width="58" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="76" y="76" width="40" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="120" y="76" width="40" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="164" y="76" width="46" height="22" rx="4" fill="none" stroke="#CCC" stroke-width="1"/>
+    <rect x="214" y="76" width="42" height="22" rx="4" fill="#333"/>
+    <text x="235" y="90" text-anchor="middle" font-size="7" fill="#fff">IMT/U</text>
+
+    <text x="20" y="118" font-size="9" font-weight="bold" fill="#333">IMT/U — Indeks Massa Tubuh</text>
+
+    <text x="20" y="142" font-size="7" fill="#888">Usia (bulan)</text>
+    <rect x="20" y="147" width="140" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="166" font-size="7" fill="#AAA">48</text>
+
+    <text x="180" y="142" font-size="7" fill="#888">JK</text>
+    <rect x="180" y="147" width="140" height="30" rx="4" fill="#333"/>
+    <text x="250" y="166" text-anchor="middle" font-size="7" fill="#fff">Laki-laki</text>
+
+    <text x="20" y="197" font-size="7" fill="#888">BB (kg)</text>
+    <rect x="20" y="202" width="140" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="28" y="221" font-size="7" fill="#AAA">16.0</text>
+
+    <text x="180" y="197" font-size="7" fill="#888">TB (cm)</text>
+    <rect x="180" y="202" width="140" height="30" rx="4" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+    <text x="188" y="221" font-size="7" fill="#AAA">102</text>
+
+    <rect x="20" y="250" width="300" height="36" rx="4" fill="#333"/>
+    <text x="170" y="273" text-anchor="middle" font-size="9" font-weight="bold" fill="#fff">Hitung</text>
+
+    <rect x="20" y="300" width="300" height="100" rx="6" fill="#FAFAFA" stroke="#DDD" stroke-width="1"/>
+    <text x="170" y="320" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Status: Gizi Baik</text>
+    <text x="170" y="338" text-anchor="middle" font-size="7" fill="#888">Z-Score: -0.42 SD</text>
+    <rect x="110" y="350" width="120" height="28" rx="4" fill="#F5F5F5"/>
+    <text x="170" y="368" text-anchor="middle" font-size="7" fill="#888">IMT/U Z: -0.42</text>
+  </g>
+
+  <!-- Screen 8: Dark mode -->
+  <g transform="translate(770, 1270)">
+    <rect width="340" height="440" rx="8" fill="#222" stroke="#444" stroke-width="1"/>
+    <text x="170" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#FFF">Mode Gelap</text>
+
+    <rect x="10" y="30" width="320" height="36" rx="4" fill="#333"/>
+    <rect x="18" y="38" width="12" height="12" rx="2" fill="#888"/>
+    <text x="36" y="47" font-size="8" fill="#CCC">GiziKita</text>
+
+    <rect x="10" y="72" width="320" height="30" rx="4" fill="#333"/>
+    <rect x="14" y="76" width="58" height="22" rx="4" fill="#555"/>
+    <text x="43" y="90" text-anchor="middle" font-size="7" fill="#FFF">Ringkasan</text>
+
+    <text x="20" y="120" font-size="9" font-weight="bold" fill="#FFF">Input Pengukuran</text>
+
+    <rect x="20" y="135" width="300" height="24" rx="4" fill="#333" stroke="#555" stroke-width="1"/>
+    <rect x="22" y="137" width="148" height="20" rx="3" fill="#555"/>
+    <text x="96" y="151" text-anchor="middle" font-size="7" fill="#FFF">Tanggal Lahir</text>
+    <text x="200" y="151" text-anchor="middle" font-size="7" fill="#888">Usia (bulan)</text>
+
+    <text x="20" y="175" font-size="7" fill="#888">Jenis Kelamin</text>
+    <rect x="20" y="180" width="142" height="28" rx="4" fill="none" stroke="#555" stroke-width="1"/>
+    <text x="91" y="198" text-anchor="middle" font-size="8" fill="#CCC">Laki-laki</text>
+    <rect x="168" y="180" width="142" height="28" rx="4" fill="none" stroke="#555" stroke-width="1"/>
+    <text x="239" y="198" text-anchor="middle" font-size="8" fill="#CCC">Perempuan</text>
+
+    <text x="20" y="225" font-size="7" fill="#888">Berat Badan (kg)</text>
+    <rect x="20" y="230" width="140" height="30" rx="4" fill="#333" stroke="#555" stroke-width="1"/>
+    <text x="180" y="225" font-size="7" fill="#888">Tinggi Badan (cm)</text>
+    <rect x="180" y="230" width="140" height="30" rx="4" fill="#333" stroke="#555" stroke-width="1"/>
+
+    <rect x="20" y="275" width="300" height="36" rx="4" fill="#555"/>
+    <text x="170" y="298" text-anchor="middle" font-size="9" font-weight="bold" fill="#FFF">Hitung</text>
+  </g>
+
+  <!-- Labels -->
+  <text x="200" y="645" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">① Ringkasan + Hasil</text>
+  <text x="570" y="645" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">② Hasil Kalkulasi</text>
+  <text x="940" y="645" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">③ Mode BB/U</text>
+  <text x="290" y="1735" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">④ Mode TB/U</text>
+  <text x="570" y="1735" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">⑤ Mode IMT/U</text>
+  <text x="940" y="1735" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">⑥ Mode Gelap</text>
+  <text x="290" y="1260" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">④ Mode Arsip — Form</text>
+  <text x="850" y="1260" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">⑤ Arsip — Daftar Catatan</text>
+
+</svg>

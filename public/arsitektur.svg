@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="system-ui, -apple-system, sans-serif">
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#999"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="700" fill="#fff"/>
+
+  <text x="450" y="35" text-anchor="middle" font-size="16" font-weight="bold" fill="#000">Flowchart Kalkulasi Status Gizi GiziKita</text>
+
+  <!-- Divider -->
+  <line x1="450" y1="50" x2="450" y2="680" stroke="#CCC" stroke-width="1" stroke-dasharray="5,3"/>
+
+  <text x="160" y="65" text-anchor="middle" font-size="11" font-weight="bold" fill="#000">FRONTEND</text>
+  <text x="160" y="78" text-anchor="middle" font-size="9" fill="#666">(UI / Input / Tampil)</text>
+
+  <text x="740" y="65" text-anchor="middle" font-size="11" font-weight="bold" fill="#000">BACKEND</text>
+  <text x="740" y="78" text-anchor="middle" font-size="9" fill="#666">(Logika / Kalkulasi)</text>
+
+  <!-- 1. Pilih -->
+  <rect x="50" y="100" width="220" height="50" rx="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+  <text x="160" y="117" text-anchor="middle" font-size="10" font-weight="bold" fill="#000">① Pilih Mode &amp; Indeks</text>
+  <text x="160" y="134" text-anchor="middle" font-size="8" fill="#555">Non-Arsip / Arsip · BB/U · TB/U · BB/TB · IMT/U</text>
+
+  <line x1="160" y1="150" x2="160" y2="175" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- 2. Input -->
+  <rect x="50" y="180" width="220" height="65" rx="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+  <text x="160" y="197" text-anchor="middle" font-size="10" font-weight="bold" fill="#000">② Input Data Anak</text>
+  <text x="160" y="214" text-anchor="middle" font-size="8" fill="#555">Usia (0-60 bln) · JK (L/P)</text>
+  <text x="160" y="230" text-anchor="middle" font-size="8" fill="#555">BB (kg) · TB (cm)</text>
+
+  <line x1="160" y1="245" x2="160" y2="270" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- 3. Validasi -->
+  <rect x="50" y="275" width="220" height="40" rx="4" fill="#F5F5F5" stroke="#333" stroke-width="1"/>
+  <text x="160" y="292" text-anchor="middle" font-size="10" font-weight="bold" fill="#000">③ Validasi Input</text>
+  <text x="160" y="305" text-anchor="middle" font-size="8" fill="#555">Usia, BB, TB harus valid</text>
+
+  <!-- Arrow across to backend -->
+  <path d="M 270 295 L 380 295 L 380 325 L 530 325" stroke="#333" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="380" y="290" text-anchor="middle" font-size="8" fill="#555">data anak</text>
+
+  <!-- 4. Referensi -->
+  <rect x="530" y="300" width="320" height="50" rx="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+  <text x="690" y="318" text-anchor="middle" font-size="10" font-weight="bold" fill="#000">④ Cari Tabel Referensi</text>
+  <text x="690" y="335" text-anchor="middle" font-size="8" fill="#555">Cocokkan indeks + umur + JK → ambil baris dari data standar</text>
+
+  <line x1="690" y1="350" x2="690" y2="375" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- 5. Z-score -->
+  <rect x="530" y="380" width="320" height="50" rx="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+  <text x="690" y="398" text-anchor="middle" font-size="10" font-weight="bold" fill="#000">⑤ Hitung Z-Score</text>
+  <text x="690" y="415" text-anchor="middle" font-size="8" fill="#555">Z = (nilai_ukur - Median) / SD · Interpolasi jika perlu</text>
+
+  <line x1="690" y1="430" x2="690" y2="455" stroke="#333" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- 6. Kategori -->
+  <rect x="530" y="460" width="320" height="50" rx="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+  <text x="690" y="478" text-anchor="middle" font-size="10" font-weight="bold" fill="#000">⑥ Kategorisasi Status</text>
+  <text x="690" y="495" text-anchor="middle" font-size="8" fill="#555">BB/U: 4 kat · TB/U: 4 kat · BB/TB: 6 kat · IMT/U: 6 kat</text>
+
+  <!-- Arrow back to frontend -->
+  <path d="M 530 485 L 380 485 L 380 515 L 270 515" stroke="#333" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <text x="380" y="510" text-anchor="middle" font-size="8" fill="#555">status gizi</text>
+
+  <!-- 7. Tampil -->
+  <rect x="50" y="490" width="220" height="50" rx="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+  <text x="160" y="507" text-anchor="middle" font-size="10" font-weight="bold" fill="#000">⑦ Tampilkan Hasil</text>
+  <text x="160" y="524" text-anchor="middle" font-size="8" fill="#555">Status gizi + Z-score per indeks</text>
+
+  <line x1="160" y1="540" x2="160" y2="565" stroke="#999" stroke-width="1" marker-end="url(#a2)"/>
+
+  <!-- 8. Simpan (opsional) -->
+  <rect x="50" y="570" width="220" height="40" rx="4" fill="#FAFAFA" stroke="#999" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="160" y="587" text-anchor="middle" font-size="9" fill="#666">⑧ Simpan ke Arsip (opsional)</text>
+  <text x="160" y="600" text-anchor="middle" font-size="8" fill="#999">Hanya di mode Arsip</text>
+
+  <!-- Summary box -->
+  <rect x="530" y="540" width="320" height="60" rx="4" fill="#FAFAFA" stroke="#999" stroke-width="1"/>
+  <text x="690" y="558" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Data Referensi</text>
+  <text x="690" y="574" text-anchor="middle" font-size="8" fill="#666">Permenkes No. 2/2020 · WHO Child Growth Standards</text>
+  <text x="690" y="590" text-anchor="middle" font-size="8" fill="#666">Tabel: BB/U · TB/U · BB/TB · IMT/U (0-60 bln)</text>
+
+</svg>
