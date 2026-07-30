@@ -1,5 +1,6 @@
 // ponytail: minimal xlsx writer — no dependencies, generates styled cells via raw XML + ZIP
 // Known ceiling: single sheet, no formulas, no merged cells, basic fills only
+import { hitungStatusGizi } from './calc';
 
 // Status → fill color mapping (Material Design inspired)
 const STATUS_FILLS = {
@@ -167,7 +168,6 @@ function buildWorkbook() {
 }
 
 function buildStyles(uniqueFills) {
-  // uniqueFills: array of RRGGBB color strings
   let xml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
 <fonts count="1"><font><sz val="11"/><name val="Calibri"/></font></fonts>
@@ -183,10 +183,10 @@ function buildStyles(uniqueFills) {
 <colors/><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>
 <cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>
 <cellXfs count="${1 + uniqueFills.length}">
-<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>`;  // default (no fill)
+<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>`;
 
   for (let i = 0; i < uniqueFills.length; i++) {
-    const fillId = 2 + i; // skip 0 (none) and 1 (gray125)
+    const fillId = 2 + i;
     xml += `<xf numFmtId="0" fontId="0" fillId="${fillId}" borderId="0" xfId="0" applyFill="1"/>`;
   }
 
@@ -206,9 +206,6 @@ function buildSharedStrings(strings) {
 }
 
 function buildSheet(rows, strings, fillMap) {
-  // rows: array of arrays (one per row, values)
-  // strings: array of unique strings
-  // fillMap: value → fill index (0 = no fill, 1+ = specific fill)
   const strIndex = {};
   strings.forEach((s, i) => { strIndex[s] = i; });
 
@@ -216,18 +213,11 @@ function buildSheet(rows, strings, fillMap) {
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
            xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
 <cols>`;
-  // Set column widths
   const colLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   for (let i = 0; i < (rows[0]?.length || 1); i++) {
     xml += `<col min="${i+1}" max="${i+1}" width="18" customWidth="1"/>`;
   }
   xml += `</cols><sheetData>`;
-
-  const colNum = (s) => {
-    let n = 0;
-    for (let i = 0; i < s.length; i++) n = n * 26 + (s.charCodeAt(i) - 64);
-    return n;
-  };
 
   for (let r = 0; r < rows.length; r++) {
     xml += `<row r="${r + 1}">`;
@@ -242,10 +232,7 @@ function buildSheet(rows, strings, fillMap) {
       } else if (val !== '' && !isNaN(val)) {
         xml += `<c r="${ref}" s="${fillIdx}"><v>${val}</v></c>`;
       } else {
-        // Empty or generic string — store as shared string anyway
-        // Actually for empty cells with fill, we need them to have content for the fill
         if (fillIdx > 0 && val === '') {
-          // Find empty string index
           const emptySi = strIndex[''] != null ? strIndex[''] : -1;
           if (emptySi >= 0) xml += `<c r="${ref}" t="s" s="${fillIdx}"><v>${emptySi}</v></c>`;
         } else {
@@ -260,60 +247,90 @@ function buildSheet(rows, strings, fillMap) {
   return xml;
 }
 
+// --- Per-index status computation ---
+function computeAllStatus(r) {
+  const hasWeight = r.weight != null && r.weight !== '';
+  const hasHeight = r.height != null && r.height !== '';
+  const umurBulan = r.umurBulan != null ? r.umurBulan
+    : r.birthDate ? Math.round((new Date() - new Date(r.birthDate)) / (1000 * 60 * 60 * 24 * 30.44)) : null;
+
+  if (!umurBulan || umurBulan < 0 || umurBulan > 60 || (!hasWeight && !hasHeight)) {
+    return { bbu: 'Tidak Ada Data', tbu: 'Tidak Ada Data', bbtb: 'Tidak Ada Data', imtu: 'Tidak Ada Data' };
+  }
+
+  const gender = r.gender || 'L';
+  const bb = hasWeight ? Number(r.weight) : 3;
+  const tb = hasHeight ? Number(r.height) : 50;
+  const full = hitungStatusGizi(umurBulan, gender, bb, tb);
+
+  const fallback = 'Tidak Ada Data';
+  return {
+    bbu: hasWeight ? full.indices.bbu.status.label : fallback,
+    tbu: hasHeight ? full.indices.tbu.status.label : fallback,
+    bbtb: (hasWeight && hasHeight) ? full.indices.bbtb.status.label : fallback,
+    imtu: (hasWeight && hasHeight) ? full.indices.imtu.status.label : fallback,
+  };
+}
+
 // --- Public API ---
 export function downloadXLSX(records, statusField = 'status', filename = 'gizikita-data.xlsx') {
-  // Build rows: header + data
-  const headers = ['Nama', 'JK', 'Tgl Lahir', 'Tgl Ukur', 'BB (kg)', 'TB (cm)', 'Status', 'Nama Orang Tua', 'Alamat'];
-  const dataRows = records.map(r => [
-    r.name ? r.name.toUpperCase() : '',
-    r.gender === 'L' ? 'L' : 'P',
-    r.birthDate || '',
-    r.measurementDate || '',
-    r.weight != null ? String(r.weight) : '',
-    r.height != null ? String(r.height) : '',
-    r.status || '',
-    r.parentName || '',
-    r.address || '',
-  ]);
+  const headers = ['Nama', 'JK', 'Tgl Lahir', 'Tgl Ukur', 'BB (kg)', 'TB (cm)',
+    'Status BB/U', 'Status TB/U', 'Status BB/TB', 'Status IMT/U',
+    'Nama Orang Tua', 'Alamat'];
+
+  const dataRows = records.map(r => {
+    const all = computeAllStatus(r);
+    return [
+      r.name ? r.name.toUpperCase() : '',
+      r.gender === 'L' ? 'L' : 'P',
+      r.birthDate || '',
+      r.measurementDate || '',
+      r.weight != null ? String(r.weight) : '',
+      r.height != null ? String(r.height) : '',
+      all.bbu,
+      all.tbu,
+      all.bbtb,
+      all.imtu,
+      r.parentName || '',
+      r.address || '',
+    ];
+  });
 
   const allRows = [headers, ...dataRows];
 
-  // Collect all unique strings for shared strings table
+  // Collect all unique strings
   const stringSet = new Set();
   for (const row of allRows) {
     for (const val of row) {
       if (val != null && val !== '') stringSet.add(String(val));
     }
   }
-  // Ensure '' is in the set for empty styled cells
   stringSet.add('');
   const strings = Array.from(stringSet);
-  const emptySi = strings.indexOf('');
 
-  // Determine fill per status value
+  // Determine fill per status value (from status columns 6-9)
   const usedFills = new Set();
   usedFills.add(DEFAULT_FILL);
   const fillForValue = {};
   for (const row of dataRows) {
-    const status = row[6]; // Status column
-    if (status) {
-      const color = STATUS_FILLS[status] || DEFAULT_FILL;
-      fillForValue[status] = color;
-      usedFills.add(color);
+    for (let ci = 6; ci < 10; ci++) {
+      const status = row[ci];
+      if (status) {
+        const color = STATUS_FILLS[status] || DEFAULT_FILL;
+        fillForValue[status] = color;
+        usedFills.add(color);
+      }
     }
   }
   const fillList = Array.from(usedFills);
-  const fillIndex = {}; // color → index (0-based in fillList)
+  const fillIndex = {};
   fillList.forEach((c, i) => { fillIndex[c] = i; });
 
-  // Map value → xf index in styles
-  // xf[0] = default (no fill), xf[1+] = fills from fillList
   const xfForValue = {};
   for (const [status, color] of Object.entries(fillForValue)) {
-    xfForValue[status] = fillIndex[color];  // 0 = no fill
+    xfForValue[status] = fillIndex[color];
   }
 
-  // Build XML files
   const encoder = new TextEncoder();
   const files = [
     { name: '[Content_Types].xml', data: encoder.encode(buildContentTypes()) },
